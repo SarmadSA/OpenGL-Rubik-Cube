@@ -1,8 +1,10 @@
+import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 
+import static com.jogamp.opengl.GL.GL_DEPTH_TEST;
 
 public class RubicsCubeRenderer extends GLCanvas implements GLEventListener {
 
@@ -22,13 +24,15 @@ public class RubicsCubeRenderer extends GLCanvas implements GLEventListener {
 
     @Override
     public void init(GLAutoDrawable drawable) {
-
+        GL2 gl = drawable.getGL().getGL2();
+        this.glu = new GLU();
+        gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); //Set background color to black
+        gl.glClearDepth(1.0f);
+        gl.glEnable(GL_DEPTH_TEST);
     }
 
     @Override
-    public void dispose(GLAutoDrawable drawable) {
-
-    }
+    public void dispose(GLAutoDrawable drawable) {}
 
     @Override
     public void display(GLAutoDrawable drawable) {
